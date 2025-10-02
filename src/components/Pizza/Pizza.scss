@@ -1,0 +1,174 @@
+// Переменные для удобства
+$primary-color: #ff6347; // Томатный цвет
+$secondary-color: #333;
+$border-radius: 8px;
+$shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+$card-bg: #fff;
+$button-bg: #f5f5f5;
+$text-color: #2c2c2c;
+
+// --- КОНТЕЙНЕР ДЛЯ СЕТКИ (РАСПОЛАГАЕТ КАРТОЧКИ) ---
+.pizza-container {
+  display: grid; // Используем Grid
+  // Адаптивная сетка: автозаполнение строками, каждый элемент занимает min 280px, max 1fr
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px; // Пространство между карточками и строками
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// --- СТИЛИ САМОЙ КАРТОЧКИ ---
+.pizza-card {
+  background-color: $card-bg;
+  border: 1px solid #eee;
+  border-radius: $border-radius;
+  box-shadow: $shadow-light;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  // ! ВАЖНО: УДАЛЕНА ЖЕСТКАЯ ШИРИНА, Grid сам управляет ею
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  // ... (Остальные стили для __header, __label, __image и т.д. ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ) ...
+  &__header {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  &__label {
+    font-size: 1.5rem;
+    color: $secondary-color;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  &__image {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  // --- Блок управления количеством ---
+  &__controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px 0;
+    width: 100%;
+  }
+
+  &__quantity-label {
+    font-weight: bold;
+    color: $secondary-color;
+    margin-bottom: 8px;
+  }
+
+  &__counter {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__button {
+    background-color: $button-bg;
+    border: 1px solid #ccc;
+    color: $secondary-color;
+    font-size: 1.2rem;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-weight: bold;
+    line-height: 1;
+
+    &:hover {
+      background-color: darken($button-bg, 5%);
+    }
+
+    &--minus {}
+    &--plus {}
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  &__count-value {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: $primary-color;
+    margin: 0 5px;
+  }
+
+  &__count-unit {
+    font-size: 0.9rem;
+    color: #777;
+  }
+
+  // --- Кнопка заказа ---
+  &__order-button {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: $primary-color;
+    color: $card-bg;
+    border: none;
+    border-radius: $border-radius;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: auto;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  // --- Стили для списка размеров (<ul>) ---
+  .sizes {
+    display: flex;
+    list-style: none;
+    padding: 5px;
+    margin: 15px 0;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    justify-content: space-between;
+    gap: 5px;
+
+    li {
+      flex-grow: 1;
+      text-align: center;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-weight: 700;
+      color: $text-color;
+      border-radius: 8px;
+      transition: background-color 0.1s ease;
+
+      &:hover {
+        background-color: darken(#f3f3f3, 5%);
+      }
+
+      &.active {
+        background-color: #ffffff;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+        color: $text-color;
+      }
+    }
+  }
+}
