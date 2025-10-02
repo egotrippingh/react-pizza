@@ -69,7 +69,7 @@ export const Pizza = ({id, title, imageUrl, sizes, price, types}) => {
             className={`${activeSize === index ? "active" : ""}`}
             key={index}
           >
-            {`${size} см.`}
+            {`${size} см`}
           </li>
         ))}
       </ul>
