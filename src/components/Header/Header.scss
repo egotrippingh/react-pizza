@@ -1,7 +1,10 @@
+@use 'sass:color';
+
 // Переменные для удобства (опционально)
-$primary-color: #fe5f1e; // Цвет, часто используемый для пиццы (оранжевый)
-$text-color: #2c2c2c;
-$bg-light: #f9f9f9;
+$primary-color: #e53935; // Красный акцент
+$text-color: #e6e6e6;
+$bg-dark: #18181a;
+$bg-dark-2: #202024;
 
 .header {
   // Стиль для корневого элемента <ul>
@@ -23,25 +26,26 @@ $bg-light: #f9f9f9;
 
   &__navigation {
     // Базовый стиль для каждого элемента <li>
-    background-color: $bg-light;
+    background-color: $bg-dark-2;
     padding: 10px 20px;
     border-radius: 30px; // Закругленные края, как у кнопки
     color: $text-color;
     font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     white-space: nowrap; // Предотвращаем перенос текста
+    border: 1px solid rgba(255, 255, 255, 0.06);
 
     // Стиль при наведении
     &:hover {
-      background-color: darken($bg-light, 3%);
+      background-color: color.adjust($bg-dark-2, $lightness: 4%);
     }
 
     // Стиль активного элемента
     &.active {
       background-color: $primary-color;
       color: #fff; // Белый текст на активном фоне
-      box-shadow: 0px 5px 10px rgba(254, 95, 30, 0.2); // Легкая тень для выделения
+      box-shadow: 0px 5px 16px rgba(229, 57, 53, 0.3); // Легкая тень для выделения
 
       // Отменяем эффект :hover, когда элемент активен
       &:hover {

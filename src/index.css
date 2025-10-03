@@ -4,4 +4,22 @@ body {
   margin-right: auto;
   padding-left: 16px;
   padding-right: 16px;
+  background-color: #0f0f10;
+  color: #e6e6e6;
+}
+
+:root {
+  --accent: #e53935; /* red accent */
+  --surface: #18181a;
+  --surface-2: #202024;
+  --text: #e6e6e6;
+  --muted: #b3b3b3;
+}
+
+a {
+  color: var(--accent);
+}
+
+.container {
+  background: transparent;
 }

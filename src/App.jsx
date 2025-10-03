@@ -10,7 +10,7 @@ export const App = () => {
 
   return (<>
       <div className="container">
-        <Header />
+        <Header category={category} />
         <div className="pizza-container">
           {pizzas.map(obj => (<Pizza key={obj.id} {...obj}
           />))}
