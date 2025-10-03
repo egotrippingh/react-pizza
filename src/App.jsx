@@ -1,5 +1,5 @@
 import './App.css'
-import { Header } from './components/Header/Header.tsx'
+import { Header } from './components/Header/Header.jsx'
 import {Pizza} from "./components/Pizza/Pizza.jsx";
 
 import pizzas from './db/pizza.json'
