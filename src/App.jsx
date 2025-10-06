@@ -7,15 +7,26 @@ import './App.css'
 
 export const App = () => {
 
+  const [pizzas, setPizzas] = React.useState([])
 
+React.useEffect(() => {
+  const fetchPizzas = async () => {
+    try {
+      const res = await fetch("https://68e2aa938e14f4523dab802e.mockapi.io/items")
 
-  const [items, setItems] = React.useState([])
+      if (!res.ok) {
+        throw new Error ("Ошибка при подключении к серверу")
+      }
+     
+      const data = await res.json()
+      setPizzas(data) 
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
-  React.useEffect(() => {
-    const pizzas = () => fetch("https://68e2aa938e14f4523dab802e.mockapi.io/")
-      .then((res) => res.json())
-      .then((arr) => setItems(arr))
-  }, [])
+  fetchPizzas()
+}, [])
 
   return (<>
       <div className="container">
