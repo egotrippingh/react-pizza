@@ -1,29 +1,32 @@
 import React from "react";
+import "./Sort.scss";
 
-export const Sort = ({sort}) => {
-    
-    const [open, setOpen] = React.useState(true)
+export const Sort = ({}) => {
+  const [open, setOpen] = React.useState(false);
+  const [selected, setSelected] = React.useState(0);
+  const list = ["популярности", "цене", "алфавиту"];
 
-    return (
-        <>
-        <span>Сортировка по: </span>
-        
-        
-        <ul>
-            {
-                open && (
-                    <div>
-                        <ul>
-                            <li>популярности</li>
-                            <li>цене</li>
-                            <li>алфавиту</li>
-                        </ul>
-                    </div>
-                )
-            }
-        </ul>
-         
-        </>
-
-    )
-}
+  return (
+    <>
+      <b>Сортировка по:</b>
+      <span onClick={() => setOpen(!open)}>{list[selected]}</span>
+      <div className="sort-popup">
+        {open && (
+          <div className={`${open ? "visible" : ""}`}>
+            <ul>
+              {list.map((name, i) => (
+                <li
+                  key={i}
+                  onClick={() => (setSelected(i), setOpen(false))}
+                  className={selected === i ? "active" : ""}
+                >
+                  {name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </>
+  );
+};

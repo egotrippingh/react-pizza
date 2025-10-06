@@ -8,6 +8,8 @@ export const Pizza = ({id, title, imageUrl, sizes, price, types}) => {
   const [activeSize, setActiveSize] = React.useState(0)
   const [activeTesto, setActiveTesto] = React.useState(0)
 
+
+
   const typeNames = ["тонкое", "традиционное"]
 
 

@@ -1,0 +1,114 @@
+@use "sass:color";
+
+// Переменные для соответствия стилистике проекта
+$primary-color: #e53935; // Красный акцент
+$text-color: #e6e6e6;
+$bg-dark: #18181a;
+$bg-dark-2: #202024;
+$border-radius: 8px;
+$shadow-light: 0 4px 16px rgba(0, 0, 0, 0.35);
+
+// Стили для основного текста компонента
+b {
+  color: $text-color;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+span {
+  color: $primary-color;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: $border-radius;
+  background-color: $bg-dark-2;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.2s ease;
+  display: inline-block;
+
+  &:hover {
+    background-color: rgba(229, 57, 53, 0.1);
+    border-color: rgba(229, 57, 53, 0.3);
+  }
+}
+
+// Контейнер для popup
+.sort-popup {
+  position: relative;
+  display: inline-block;
+}
+
+// Выпадающий список
+.sort-popup > div {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: $bg-dark-2;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: $border-radius;
+  box-shadow: $shadow-light;
+  z-index: 1000;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+  min-width: 150px;
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+// Список опций
+.sort-popup ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+// Элемент списка
+.sort-popup li {
+  padding: 12px 16px;
+  color: $text-color;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: rgba(229, 57, 53, 0.1);
+    color: $primary-color;
+  }
+
+  &.active {
+    background-color: rgba(229, 57, 53, 0.15);
+    color: $primary-color;
+    font-weight: 600;
+  }
+}
+
+// Адаптивность для мобильных устройств
+@media (max-width: 768px) {
+  .sort-popup > div {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: $border-radius $border-radius 0 0;
+    transform: translateY(100%);
+    min-width: auto;
+
+    &.visible {
+      transform: translateY(0);
+    }
+  }
+}
