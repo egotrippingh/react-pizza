@@ -1,56 +1,39 @@
-@use 'sass:color';
+@use "sass:color";
 
-// Переменные для удобства (опционально)
-$primary-color: #e53935; // Красный акцент
-$text-color: #e6e6e6;
-$bg-dark: #18181a;
-$bg-dark-2: #202024;
+$primary-color: #e53935;
 
 .header {
-  // Стиль для корневого элемента <ul>
   display: flex;
-  justify-content: center;
   align-items: center;
-  list-style: none; // Убираем маркеры списка
-  padding: 0;
-  margin: 20px 0;
-  gap: 10px; // Расстояние между элементами
-  overflow-x: auto; // Позволяет прокручивать, если элементов много
-  -ms-overflow-style: none; // Скрываем скроллбар для IE/Edge
-  scrollbar-width: none; // Скрываем скроллбар для Firefox
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 0;
+}
 
-  // Скрываем скроллбар для WebKit (Chrome, Safari)
-  &::-webkit-scrollbar {
-    display: none;
-  }
+.header .logo {
+  display: inline-flex;
+}
 
-  &__navigation {
-    // Базовый стиль для каждого элемента <li>
-    background-color: $bg-dark-2;
-    padding: 10px 20px;
-    border-radius: 30px; // Закругленные края, как у кнопки
-    color: $text-color;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    white-space: nowrap; // Предотвращаем перенос текста
-    border: 1px solid rgba(255, 255, 255, 0.06);
+.header .cart-button,
+.header .cart {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: $primary-color;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-weight: 700;
+}
 
-    // Стиль при наведении
-    &:hover {
-      background-color: color.adjust($bg-dark-2, $lightness: 4%);
-    }
+.cart-button__price,
+.cart-button__count {
+  color: #fff;
+  opacity: 1;
+}
 
-    // Стиль активного элемента
-    &.active {
-      background-color: $primary-color;
-      color: #fff; // Белый текст на активном фоне
-      box-shadow: 0px 5px 16px rgba(229, 57, 53, 0.3); // Легкая тень для выделения
-
-      // Отменяем эффект :hover, когда элемент активен
-      &:hover {
-        background-color: $primary-color;
-      }
-    }
-  }
+.cart-button__count {
+  pointer-events: none;
+  user-select: none;
 }

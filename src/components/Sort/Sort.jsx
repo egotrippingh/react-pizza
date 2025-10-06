@@ -7,7 +7,7 @@ export const Sort = ({}) => {
   const list = ["популярности", "цене", "алфавиту"];
 
   return (
-    <>
+    <div>
       <b>Сортировка по:</b>
       <span onClick={() => setOpen(!open)}>{list[selected]}</span>
       <div className="sort-popup">
@@ -27,6 +27,6 @@ export const Sort = ({}) => {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
