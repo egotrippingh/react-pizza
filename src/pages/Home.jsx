@@ -1,8 +1,8 @@
 import React from "react";
-import Pizza from "../components/Pizza/Pizza.jsx";
-import Sort from "../components/Sort/Sort.jsx";
+import Pizza from "../components/Pizza";
+import Sort from "../components/Sort";
 import PizzaSkeleton from "../components/PizzaSkeleton";
-import Categories from "../components/Categories/Categories.jsx";
+import Categories from "../components/Categories";
 
 
 const Home = () => {

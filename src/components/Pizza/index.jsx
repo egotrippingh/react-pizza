@@ -84,3 +84,5 @@ const Pizza = ({id, title, imageUrl, sizes, price, types}) => {
 }
 
 export default Pizza;
+
+

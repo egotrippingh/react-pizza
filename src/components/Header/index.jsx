@@ -1,6 +1,6 @@
 import React from "react";
 import "./Header.scss";
-import Logo from "../Logo/Logo.jsx";
+import Logo from "../Logo";
 import Cart from "../Cart";
 const Header = () => {
   return (
@@ -14,3 +14,5 @@ const Header = () => {
 };
 
 export default Header;
+
+
