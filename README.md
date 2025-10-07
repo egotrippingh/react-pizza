@@ -1,75 +1,94 @@
-# React + TypeScript + Vite
+# React Pizza (Vite + React 19)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Небольшое SPA-приложение каталога пиццы на React. Главная страница отображает список пицц с загрузочными скелетонами, фильтрами по категориям и сортировкой. Данные загружаются с публичного mock API, навигация реализована через `react-router`.
 
-Currently, two official plugins are available:
+## Стек и возможности
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 19** + **Vite** (роллап-билд `rolldown-vite@7.1.12`)
+- **React Router v7** (`react-router`, `react-router-dom`)
+- **Sass/SCSS** (через `sass-embedded`), модульные SCSS для компонентов
+- **ESLint 9** c настройками для React и TypeScript
+- **React Compiler** (плагин `babel-plugin-react-compiler` включён)
+- **react-content-loader** для скелетонов (используется в `PizzaSkeleton`)
 
-## React Compiler
+## Скрипты
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+```bash
+# запуск дев-сервера
+npm run start
 
-Note: This will impact Vite dev & build performances.
+# продакшн-сборка
+npm run build
 
-## Expanding the ESLint configuration
+# предпросмотр продакшн-сборки
+npm run preview
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# линтинг
+npm run lint
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Быстрый старт
+
+```bash
+git clone <repo-url>
+cd reactpizzasite
+npm ci            # или npm install
+npm run start
+```
+Откройте `http://localhost:5173` (порт может отличаться в вашей среде).
+
+## Структура проекта
+
+```text
+reactpizzasite/
+  src/
+    components/
+      Header/        # шапка сайта (логотип + корзина)
+      Logo/
+      Cart/
+      Categories/    # список категорий, локальное состояние активной вкладки
+      Sort/          # выбор сортировки
+      Pizza/         # карточка пиццы
+      PizzaSkeleton/ # скелетон карточки при загрузке
+    pages/
+      Home.jsx       # главная: фильтры + список пицц
+      CartPage.jsx   # заглушка страницы корзины
+      NotFound.jsx   # 404
+    App.jsx          # корневой компонент
+    main.jsx         # точка входа, Router + App
+```
+
+## Навигация и маршрутизация
+
+Входная точка `src/main.jsx` оборачивает приложение в `BrowserRouter`. В текущей версии основное содержимое рендерится непосредственно в `App.jsx` и `Home.jsx`. При необходимости можно добавить маршруты для страниц корзины и 404.
+
+## Загрузка данных
+
+`src/pages/Home.jsx` загружает список пицц c mock API:
 
 ```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+fetch("https://68e2aa938e14f4523dab802e.mockapi.io/items")
 ```
+
+Пока данные загружаются, показываются элементы `PizzaSkeleton`. После получения данных отображаются карточки `Pizza`.
+
+## Стили
+
+Компоненты используют SCSS (`sass-embedded`). Файлы: `Header.scss`, `Categories.scss`, `Sort.scss`, `Pizza.scss` и глобальные `App.css`, `index.css`.
+
+## Конфигурация TypeScript/ESLint
+
+Хотя исходный код на JS/JSX, в проекте настроен TypeScript (`tsconfig.app.json`) и строгие правила линтинга. Это упрощает постепенный переход на TS при необходимости.
+
+## Требования
+
+- Node.js 18+ (рекомендуется актуальная LTS)
+- npm 9+
+
+## Полезные пути
+
+- Точка входа: `src/main.jsx`
+- Корневой компонент: `src/App.jsx`
+- Главная страница: `src/pages/Home.jsx`
+- Настройки Vite: `vite.config.ts`
+- ESLint конфиг: `eslint.config.js`

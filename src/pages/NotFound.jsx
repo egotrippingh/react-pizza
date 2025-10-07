@@ -2,7 +2,11 @@ import React from "react";
 
 const NotFound = () => {
     return (
-        <h1>Ничего не найдено</h1>
+        <h1>
+            <span>😒</span>
+            <br />
+            Ничего не найдено
+            </h1>
     )
 }
 
