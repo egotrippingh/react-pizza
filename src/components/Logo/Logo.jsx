@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Logo = () => {
+const Logo = () => {
   return (
     <a href="/">
       <img
@@ -11,3 +11,5 @@ export const Logo = () => {
     </a>
   );
 };
+
+export default Logo;

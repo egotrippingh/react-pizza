@@ -2,7 +2,7 @@ import './Pizza.scss'
 import React from "react";
 
 
-export const Pizza = ({id, title, imageUrl, sizes, price, types}) => {
+const Pizza = ({id, title, imageUrl, sizes, price, types}) => {
 
   const [pizzaCount, setPizzaCount] = React.useState(0)
   const [activeSize, setActiveSize] = React.useState(0)
@@ -82,3 +82,5 @@ export const Pizza = ({id, title, imageUrl, sizes, price, types}) => {
     </section>
   )
 }
+
+export default Pizza;

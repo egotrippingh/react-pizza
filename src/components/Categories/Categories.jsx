@@ -1,6 +1,6 @@
 import React from "react";
 import "./Categories.scss";
-export const Categories = () => {
+const Categories = () => {
   const navigationList = [
     { id: 1, label: "Мясные", url: "/catalog/myaso-pizza/" },
     { id: 2, label: "Вегетарианские", url: "/basket/vegan-pizza/" },
@@ -31,3 +31,5 @@ export const Categories = () => {
     </>
   );
 };
+
+export default Categories;

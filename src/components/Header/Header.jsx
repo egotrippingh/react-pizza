@@ -1,8 +1,8 @@
 import React from "react";
 import "./Header.scss";
-import { Logo } from "../Logo/Logo.jsx";
-import { Cart } from "../Cart";
-export const Header = () => {
+import Logo from "../Logo/Logo.jsx";
+import Cart from "../Cart";
+const Header = () => {
   return (
     <>
       <div className="header">
@@ -12,3 +12,5 @@ export const Header = () => {
     </>
   );
 };
+
+export default Header;

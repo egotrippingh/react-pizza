@@ -13,8 +13,9 @@
     "react": "^19.1.1",
     "react-content-loader": "^7.1.1",
     "react-dom": "^19.1.1",
-    "scss": "^0.2.4",
-    "uuidv4": "^6.2.13"
+    "react-router": "^7.9.3",
+    "react-router-dom": "7.9.3",
+    "scss": "^0.2.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",

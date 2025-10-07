@@ -1,7 +1,7 @@
 import React from "react";
 import "./Sort.scss";
 
-export const Sort = ({}) => {
+const Sort = ({}) => {
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = React.useState(0);
   const list = ["популярности", "цене", "алфавиту"];
@@ -30,3 +30,5 @@ export const Sort = ({}) => {
     </div>
   );
 };
+
+export default Sort;
