@@ -4,45 +4,48 @@ import Sort from "../components/Sort";
 import PizzaSkeleton from "../components/PizzaSkeleton";
 import Categories from "../components/Categories";
 
-
 const Home = () => {
+  const [pizzas, setPizzas] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
 
+  const [categoryId, setCategoryId] = React.useState(1);
 
-    const [pizzas, setPizzas] = React.useState([]);
-    const [isLoading, setIsLoading] = React.useState(true);
-    React.useEffect(() => {
-      const fetchPizzas = async () => {
-        try {
-          const res = await fetch(
-            "https://68e2aa938e14f4523dab802e.mockapi.io/items"
-          );
-          if (!res.ok) {
-            throw new Error("Ошибка при подключении к серверу");
-          }
-          const data = await res.json();
-          setPizzas(data);
-          setIsLoading(false);
-        } catch (err) {
-          console.error(err);
+  React.useEffect(() => {
+    const fetchPizzas = async () => {
+      try {
+        const res = await fetch(
+          "https://68e2aa938e14f4523dab802e.mockapi.io/items"
+        );
+        if (!res.ok) {
+          throw new Error("Ошибка при подключении к серверу");
         }
-      };
-    
-      fetchPizzas();
-    }, []);
+        const data = await res.json();
+        setPizzas(data);
+        setIsLoading(false);
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
-    return (
-      <>
-        <div className="filters-row">
-          <Categories />
-          <Sort />
-        </div>
-        <div className="pizza-container">
-          {isLoading
-            ? [...new Array(6)].map((_, index) => <PizzaSkeleton key={index} />)
-            : pizzas.map((obj) => <Pizza key={obj.id} {...obj} />)}
-        </div>
-      </>
-    );
-}
+    fetchPizzas();
+  }, []);
+
+  return (
+    <>
+      <div className="filters-row">
+        <Categories
+          value={categoryId}
+          onClickCategory={(i) => setCategoryId(i)}
+        />
+        <Sort />
+      </div>
+      <div className="pizza-container">
+        {isLoading
+          ? [...new Array(6)].map((_, index) => <PizzaSkeleton key={index} />)
+          : pizzas.map((obj) => <Pizza key={obj.id} {...obj} />)}
+      </div>
+    </>
+  );
+};
 
 export default Home;

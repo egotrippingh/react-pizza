@@ -1,6 +1,6 @@
 import React from "react";
 import "./Categories.scss";
-const Categories = () => {
+const Categories = ({ value, onClickCategory }) => {
   const navigationList = [
     { id: 1, label: "Мясные", url: "/catalog/myaso-pizza/" },
     { id: 2, label: "Вегетарианские", url: "/basket/vegan-pizza/" },
@@ -9,18 +9,16 @@ const Categories = () => {
     { id: 5, label: "Закрытые", url: "/basket/closed-pizza/" },
   ];
 
-  const [activeId, setActiveId] = React.useState(1);
-
   return (
     <>
       <ul className="categories">
-        {navigationList.map((item) => {
+        {navigationList.map((item, i) => {
           return (
             <li
-              onClick={() => setActiveId(item.id)}
-              key={item.id}
+              onClick={() => onClickCategory(i)}
+              key={i}
               className={`categories__navigation ${
-                activeId === item.id ? "active" : ""
+                value === i ? "active" : ""
               }`}
             >
               {item.label}
@@ -33,5 +31,3 @@ const Categories = () => {
 };
 
 export default Categories;
-
-
