@@ -1,12 +1,13 @@
 import React from "react";
+import NotFoundBlock from "@/components/NotFoundBlock";
 
 const NotFound = () => {
     return (
-        <h1>
-            <span>😒</span>
-            <br />
-            Ничего не найдено
-            </h1>
+
+        <>
+        <NotFoundBlock />
+        <button> Назад </button>        
+        </>
     )
 }
 
