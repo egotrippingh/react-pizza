@@ -1,13 +1,13 @@
 @use "sass:color";
 
 // Переменные для удобства
-$primary-color: #e53935; // Красный акцент
-$secondary-color: #e6e6e6;
+$primary-color: #ff7a00; // Оранжевый акцент
+$secondary-color: #222222;
 $border-radius: 8px;
-$shadow-light: 0 4px 16px rgba(0, 0, 0, 0.35);
-$card-bg: #18181a;
-$button-bg: #202024;
-$text-color: #e6e6e6;
+$shadow-light: 0 8px 24px rgba(0, 0, 0, 0.08);
+$card-bg: #ffffff;
+$button-bg: #f5f5f7;
+$text-color: #222222;
 
 // --- КОНТЕЙНЕР ДЛЯ СЕТКИ (РАСПОЛАГАЕТ КАРТОЧКИ) ---
 .pizza-container {
@@ -20,10 +20,33 @@ $text-color: #e6e6e6;
   margin: 0 auto;
 }
 
+// Адаптивность сетки каталога
+@media (max-width: 1200px) {
+  .pizza-container {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (max-width: 900px) {
+  .pizza-container {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pizza-container {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    padding: 16px;
+  }
+}
+
 // --- СТИЛИ САМОЙ КАРТОЧКИ ---
 .pizza-card {
   background-color: $card-bg;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid #e6e6ea;
   border-radius: $border-radius;
   box-shadow: $shadow-light;
   padding: 20px;
@@ -35,8 +58,8 @@ $text-color: #e6e6e6;
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-    border-color: rgba(229, 57, 53, 0.25);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    border-color: rgba(255, 122, 0, 0.25);
   }
 
   // ... (Остальные стили для __header, __label, __image и т.д. ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ) ...
@@ -59,7 +82,7 @@ $text-color: #e6e6e6;
     height: auto;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
   }
 
   // --- Блок управления количеством ---
@@ -104,7 +127,7 @@ $text-color: #e6e6e6;
 
   &__button {
     background-color: $button-bg;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid #e6e6ea;
     color: $secondary-color;
     font-size: 1.2rem;
     width: 35px;
@@ -116,8 +139,8 @@ $text-color: #e6e6e6;
     line-height: 1;
 
     &:hover {
-      background-color: color.adjust($button-bg, $lightness: 4%);
-      border-color: rgba(229, 57, 53, 0.35);
+      background-color: color.adjust($button-bg, $lightness: -4%);
+      border-color: rgba(255, 122, 0, 0.35);
     }
 
     &:active {
@@ -204,7 +227,7 @@ $text-color: #e6e6e6;
     list-style: none;
     padding: 5px;
     margin: 15px 0;
-    background-color: #1e1e21;
+    background-color: #f5f5f7;
     border-radius: 10px;
     justify-content: space-between;
     gap: 5px;
@@ -220,14 +243,14 @@ $text-color: #e6e6e6;
       transition: background-color 0.1s ease, color 0.1s ease;
 
       &:hover {
-        background-color: color.adjust(#1e1e21, $lightness: 4%);
+        background-color: color.adjust(#f5f5f7, $lightness: -4%);
       }
 
       &.active {
-        background-color: #121214;
-        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.35);
-        color: #ffffff;
-        outline: 1px solid rgba(229, 57, 53, 0.35);
+        background-color: #ffffff;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+        color: #222222;
+        outline: 1px solid rgba(255, 122, 0, 0.35);
       }
     }
   }

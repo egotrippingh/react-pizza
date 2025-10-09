@@ -16,3 +16,137 @@
   justify-content: space-between;
   gap: 16px;
 }
+
+/* Light theme spacing helpers */
+.topbar,
+.filters-row {
+  color: var(--text);
+}
+
+/* Cart page light styles */
+.cart-page {
+  max-width: 900px;
+  margin: 0 auto 40px;
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 64px 1fr auto auto;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border, #e6e6ea);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.cart-item__image {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cart-item__title {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.cart-item__meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.cart-item__qty {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.cart-item__price {
+  font-weight: 700;
+}
+
+.cart-summary {
+  margin-top: 20px;
+  background: var(--surface-2);
+  border: 1px solid var(--border, #e6e6ea);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.cart-summary__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.cart-summary__actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.btn--accent {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn--ghost {
+  background: #ffffff;
+  border-color: var(--border, #e6e6ea);
+  color: var(--text);
+}
+
+/* Адаптив корзины */
+@media (max-width: 900px) {
+  .cart-page {
+    max-width: 100%;
+  }
+  .cart-item {
+    grid-template-columns: 56px 1fr auto;
+  }
+  .cart-item__qty {
+    order: 3;
+    justify-self: end;
+  }
+  .cart-item__price {
+    order: 4;
+    justify-self: end;
+  }
+}
+
+@media (max-width: 600px) {
+  .cart-item {
+    grid-template-columns: 48px 1fr; /* цена переносится вниз */
+    grid-template-areas: "img info" "qty price";
+    row-gap: 8px;
+  }
+  .cart-item__image { grid-area: img; }
+  .cart-item__info { grid-area: info; }
+  .cart-item__qty { grid-area: qty; }
+  .cart-item__price { grid-area: price; justify-self: end; }
+
+  .cart-summary__actions {
+    flex-direction: column;
+  }
+  .btn { width: 100%; }
+}

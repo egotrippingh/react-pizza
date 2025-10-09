@@ -1,12 +1,12 @@
 @use "sass:color";
 
 // Переменные для соответствия стилистике проекта
-$primary-color: #e53935; // Красный акцент
-$text-color: #e6e6e6;
-$bg-dark: #18181a;
-$bg-dark-2: #202024;
+$primary-color: #ff7a00; // Оранжевый акцент
+$text-color: #222222;
+$bg-light: #ffffff;
+$bg-light-2: #f5f5f7;
 $border-radius: 8px;
-$shadow-light: 0 4px 16px rgba(0, 0, 0, 0.35);
+$shadow-light: 0 8px 24px rgba(0, 0, 0, 0.08);
 
 // Стили для основного текста компонента
 b {
@@ -22,14 +22,14 @@ span {
   cursor: pointer;
   padding: 8px 16px;
   border-radius: $border-radius;
-  background-color: $bg-dark-2;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: $bg-light-2;
+  border: 1px solid #e6e6ea;
   transition: all 0.2s ease;
   display: inline-block;
 
   &:hover {
-    background-color: rgba(229, 57, 53, 0.1);
-    border-color: rgba(229, 57, 53, 0.3);
+    background-color: rgba(255, 122, 0, 0.08);
+    border-color: rgba(255, 122, 0, 0.24);
   }
 }
 
@@ -45,8 +45,8 @@ span {
   top: 100%;
   left: 0;
   right: 0;
-  background-color: $bg-dark-2;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: $bg-light-2;
+  border: 1px solid #e6e6ea;
   border-radius: $border-radius;
   box-shadow: $shadow-light;
   z-index: 1000;
@@ -77,19 +77,19 @@ span {
   color: $text-color;
   cursor: pointer;
   transition: background-color 0.15s ease, color 0.15s ease;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid #eeeef2;
 
   &:last-child {
     border-bottom: none;
   }
 
   &:hover {
-    background-color: rgba(229, 57, 53, 0.1);
+    background-color: rgba(255, 122, 0, 0.08);
     color: $primary-color;
   }
 
   &.active {
-    background-color: rgba(229, 57, 53, 0.15);
+    background-color: rgba(255, 122, 0, 0.12);
     color: $primary-color;
     font-weight: 600;
   }

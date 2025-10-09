@@ -1,10 +1,10 @@
 @use "sass:color";
 
 // Переменные для удобства (опционально)
-$primary-color: #e53935; // Красный акцент
-$text-color: #e6e6e6;
-$bg-dark: #18181a;
-$bg-dark-2: #202024;
+$primary-color: #ff7a00; // Оранжевый акцент
+$text-color: #222222;
+$bg-light: #ffffff;
+$bg-light-2: #f5f5f7;
 
 .categories {
   // Стиль для корневого элемента <ul>
@@ -26,7 +26,7 @@ $bg-dark-2: #202024;
 
   &__navigation {
     // Базовый стиль для каждого элемента <li>
-    background-color: $bg-dark-2;
+    background-color: $bg-light-2;
     padding: 10px 20px;
     border-radius: 30px; // Закругленные края, как у кнопки
     color: $text-color;
@@ -35,11 +35,11 @@ $bg-dark-2: #202024;
     transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out,
       box-shadow 0.15s ease-in-out;
     white-space: nowrap; // Предотвращаем перенос текста
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid #e6e6ea;
 
     // Стиль при наведении
     &:hover {
-      background-color: color.adjust($bg-dark-2, $lightness: 4%);
+      background-color: color.adjust($bg-light-2, $lightness: -2%);
     }
 
     // Стиль активного элемента

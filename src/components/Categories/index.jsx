@@ -2,11 +2,12 @@ import React from "react";
 import "./Categories.scss";
 const Categories = ({ value, onClickCategory }) => {
   const navigationList = [
-    { id: 1, label: "Мясные", url: "/catalog/myaso-pizza/" },
-    { id: 2, label: "Вегетарианские", url: "/basket/vegan-pizza/" },
-    { id: 3, label: "Гриль", url: "/basket/grile-pizza/" },
-    { id: 4, label: "Острые", url: "/basket/hot-pizza/" },
-    { id: 5, label: "Закрытые", url: "/basket/closed-pizza/" },
+    { label: "Все"},
+    { label: "Мясные" },
+    { label: "Вегетарианские"},
+    { label: "Гриль" },
+    { label: "Острые" },
+    { label: "Закрытые" },
   ];
 
   return (
