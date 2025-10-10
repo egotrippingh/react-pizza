@@ -1,32 +1,38 @@
 import React from "react";
 import "./Sort.scss";
 
-const Sort = ({}) => {
+const Sort = ({value, onChangeSort, desc, setDescSort}) => {
   const [open, setOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState(0);
-  const list = ["популярности", "цене", "алфавиту"];
+  
+  const list = [
+    { name: "популярности", sortProp: "rating" },
+    { name: "цене", sortProp: "price" },
+    { name: "алфавиту", sortProp: "title" },
+  ];
+
 
   return (
     <div>
       <b>Сортировка по:</b>
-      <span onClick={() => setOpen(!open)}>{list[selected]}</span>
+      <span onClick={() => setOpen(!open)}>{value.name}</span>
       <div className="sort-popup">
         {open && (
           <div className={`${open ? "visible" : ""}`}>
             <ul>
-              {list.map((name, i) => (
+              {list.map((obj, i) => (
                 <li
                   key={i}
-                  onClick={() => (setSelected(i), setOpen(false))}
-                  className={selected === i ? "active" : ""}
+                  onClick={() => (onChangeSort(obj), setOpen(false))}
+                  className={value.sortProp === obj.sortProp ? "active" : ""}
                 >
-                  {name}
+                  {obj.name}
                 </li>
               ))}
             </ul>
           </div>
         )}
       </div>
+      <span onClick={setDescSort}>{desc ? '↓' : '↑'}</span>
     </div>
   );
 };
