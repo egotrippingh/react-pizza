@@ -1,4 +1,5 @@
 import React from "react";
+import Pagination from "../components/Pagination";
 import Pizza from "../components/Pizza";
 import Sort from "../components/Sort";
 import PizzaSkeleton from "../components/PizzaSkeleton";
@@ -8,8 +9,9 @@ const Home = ({ searchValue }) => {
   const [pizzas, setPizzas] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
-  const [descSort, setDescSort] = React.useState(true);
+  const [currentPage, setCurrentPage] = React.useState(1);
 
+  const [descSort, setDescSort] = React.useState(true);
   const [categoryId, setCategoryId] = React.useState(0);
   const [sortType, setSortType] = React.useState({
     name: "популярности",
@@ -28,7 +30,7 @@ const Home = ({ searchValue }) => {
       try {
         setIsLoading(true);
         const res = await fetch(
-          `https://68e2aa938e14f4523dab802e.mockapi.io/items?${
+          `https://68e2aa938e14f4523dab802e.mockapi.io/items?page=${currentPage}&limit=6&${
             categoryId > 0 ? `category=${categoryId}&` : ""
           }sortBy=${sortType.sortProp}&order=$
           {descSort ? "desc" : "asc"}
@@ -46,7 +48,7 @@ const Home = ({ searchValue }) => {
     };
     fetchPizzas();
     window.scrollTo(0, 0);
-  }, [categoryId, sortType.sortProp, descSort, searchValue]);
+  }, [categoryId, sortType.sortProp, descSort, searchValue, currentPage]);
 
   return (
     <>
@@ -65,6 +67,7 @@ const Home = ({ searchValue }) => {
       <div className="pizza-container">
         {isLoading ? skeletons : pizzasItems}
       </div>
+      <Pagination onChangePage={(number) => setCurrentPage(number)} />
     </>
   );
 };
