@@ -1,0 +1,18 @@
+.root {
+  border: solid rgba(0, 0, 0, 0.1);
+  padding: 12px 15px;
+  width: 300px;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.icon {
+  opacity: 0.5;
+}
+
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
