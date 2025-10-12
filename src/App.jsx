@@ -9,19 +9,20 @@ import Cart from "./pages/Cart";
 import "./App.css";
 
 const App = () => {
+  const [searchValue, setSearchValue] = React.useState("");
 
   return (
     <>
       <div className="container">
         <div className="topbar">
-          <Header/>
+          <Header searchValue={searchValue} setSearchValue={setSearchValue} />
         </div>
       </div>
       <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Route path="/" element={<Home searchValue={searchValue} />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </>
   );
 };

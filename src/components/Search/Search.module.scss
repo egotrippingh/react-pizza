@@ -4,12 +4,23 @@
   width: 300px;
   border-radius: 10px;
   font-size: 16px;
+  z-index: 100;
 }
 
-.icon {
+.icon_find {
   opacity: 0.5;
+  position: relative;
+  z-index: 200;
+  right: 35px;
 }
 
+.icon_clear {
+  opacity: 0.5;
+  position: relative;
+  z-index: 200;
+  right: 35px;
+  cursor: pointer;
+}
 
 .container {
   display: flex;

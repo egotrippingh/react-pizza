@@ -5,12 +5,12 @@ import Logo from "../Logo";
 import CartIcon from "../CartIcon";
 import Search from "../Search";
 
-const Header = () => {
+const Header = ({ searchValue, setSearchValue }) => {
   return (
     <>
       <div className="header">
         <Logo />
-        <Search />
+        <Search searchValue={searchValue} setSearchValue={setSearchValue} />
         <Link to="/cart">
           <CartIcon />
         </Link>
