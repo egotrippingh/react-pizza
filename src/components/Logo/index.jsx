@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import pizzaLogo from "@/assets/pizza_logo.png";
+import pizzaLogo from "src/assets/pizza_logo.png";
 
 const Logo = () => {
   return (

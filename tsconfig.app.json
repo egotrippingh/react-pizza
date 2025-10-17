@@ -16,9 +16,10 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "allowJs": true,
+    /* alias setting */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "src/*": ["src/*"]
     },
 
     /* Linting */
