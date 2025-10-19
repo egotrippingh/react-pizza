@@ -10,7 +10,7 @@ $button-bg: #f5f5f7;
 $text-color: #222222;
 
 // --- КОНТЕЙНЕР ДЛЯ СЕТКИ (РАСПОЛАГАЕТ КАРТОЧКИ) ---
-.pizza-container {
+:global(.pizza-container) {
   display: grid; // Используем Grid
   // Адаптивная сетка: автозаполнение строками, каждый элемент занимает min 280px, max 1fr
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -22,21 +22,21 @@ $text-color: #222222;
 
 // Адаптивность сетки каталога
 @media (max-width: 1200px) {
-  .pizza-container {
+  :global(.pizza-container) {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 24px;
   }
 }
 
 @media (max-width: 900px) {
-  .pizza-container {
+  :global(.pizza-container) {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 20px;
   }
 }
 
 @media (max-width: 600px) {
-  .pizza-container {
+  :global(.pizza-container) {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 16px;
     padding: 16px;
@@ -44,7 +44,7 @@ $text-color: #222222;
 }
 
 // --- СТИЛИ САМОЙ КАРТОЧКИ ---
-.pizza-card {
+.card {
   background-color: $card-bg;
   border: 1px solid #e6e6ea;
   border-radius: $border-radius;
@@ -62,21 +62,21 @@ $text-color: #222222;
     border-color: rgba(255, 122, 0, 0.25);
   }
 
-  // ... (Остальные стили для __header, __label, __image и т.д. ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ) ...
-  &__header {
+  // Внутренние элементы карточки
+  .header {
     text-align: center;
     width: 100%;
     margin-bottom: 15px;
   }
 
-  &__label {
+  .title {
     font-size: 1.5rem;
     color: $secondary-color;
     margin-top: 0;
     margin-bottom: 10px;
   }
 
-  &__image {
+  .image {
     width: 100%;
     max-width: 200px;
     height: auto;
@@ -86,7 +86,7 @@ $text-color: #222222;
   }
 
   // --- Блок управления количеством ---
-  &__controls {
+  .controls {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -94,7 +94,7 @@ $text-color: #222222;
     width: 100%;
   }
 
-  &__quantity-label {
+  .qtyLabel {
     font-weight: normal;
     color: $text-color;
     margin-bottom: 8px;
@@ -117,7 +117,7 @@ $text-color: #222222;
     }
   }
 
-  &__counter {
+  .counter {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -125,7 +125,7 @@ $text-color: #222222;
     margin: 8px 0;
   }
 
-  &__button {
+  .button {
     background-color: $button-bg;
     border: 1px solid #e6e6ea;
     color: $secondary-color;
@@ -147,12 +147,12 @@ $text-color: #222222;
       transform: scale(0.95);
     }
 
-    &--minus {
+    &Minus {
       margin-right: 8px;
     }
   }
 
-  &__count-value {
+  .countValue {
     font-size: 1.2rem;
     font-weight: normal;
     color: $text-color;
@@ -176,7 +176,7 @@ $text-color: #222222;
     }
   }
 
-  &__count-unit {
+  .countUnit {
     font-size: 0.9rem;
     color: $text-color;
     font-weight: normal;
@@ -199,7 +199,7 @@ $text-color: #222222;
   }
 
   // --- Кнопка заказа ---
-  &__order-button {
+  .orderButton {
     width: 100%;
     padding: 12px 20px;
     background-color: $primary-color;
@@ -246,7 +246,7 @@ $text-color: #222222;
         background-color: color.adjust(#f5f5f7, $lightness: -4%);
       }
 
-      &.active {
+      &:global(.active) {
         background-color: #ffffff;
         box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
         color: #222222;

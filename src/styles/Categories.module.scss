@@ -6,7 +6,7 @@ $text-color: #222222;
 $bg-light: #ffffff;
 $bg-light-2: #f5f5f7;
 
-.categories {
+.root {
   // Стиль для корневого элемента <ul>
   display: flex;
   justify-content: center;
@@ -24,7 +24,7 @@ $bg-light-2: #f5f5f7;
     display: none;
   }
 
-  &__navigation {
+  .item {
     // Базовый стиль для каждого элемента <li>
     background-color: $bg-light-2;
     padding: 10px 20px;
@@ -43,7 +43,7 @@ $bg-light-2: #f5f5f7;
     }
 
     // Стиль активного элемента
-    &.active {
+    &:global(.active) {
       background-color: $primary-color;
       color: #fff; // Белый текст на активном фоне
 
@@ -54,3 +54,5 @@ $bg-light-2: #f5f5f7;
     }
   }
 }
+
+

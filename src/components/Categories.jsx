@@ -1,5 +1,5 @@
 import React from "react";
-import "/src/styles/Categories.scss";
+import styles from "/src/styles/Categories.module.scss";
 
 const Categories = ({ value, onClickCategory }) => {
   const navigationList = [
@@ -13,15 +13,14 @@ const Categories = ({ value, onClickCategory }) => {
 
   return (
     <>
-      <ul className="categories">
+      <ul className={styles.root}>
         {navigationList.map((item, i) => {
           return (
             <li
               onClick={() => onClickCategory(i)}
               key={i}
-              className={`categories__navigation ${
-                value === i ? "active" : ""
-              }`}>
+              className={`${styles.item} ${value === i ? "active" : ""}`}
+            >
               {item.label}
             </li>
           );

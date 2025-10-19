@@ -10,12 +10,12 @@ $primary-color: #ff7a00; // orange accent
   padding: 16px 0;
 }
 
-.header .logo {
+.header :global(.logo) {
   display: inline-flex;
 }
 
-.header .cart-button,
-.header .cart {
+.header :global(.cart-button),
+.header :global(.cart) {
   display: inline-flex;
   align-items: center;
   gap: 10px;

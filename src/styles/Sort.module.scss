@@ -34,13 +34,13 @@ span {
 }
 
 // Контейнер для popup
-.sort-popup {
+.popup {
   position: relative;
   display: inline-block;
 }
 
 // Выпадающий список
-.sort-popup > div {
+.popup > div {
   position: absolute;
   top: 100%;
   left: 0;
@@ -57,7 +57,7 @@ span {
   transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
   min-width: 150px;
 
-  &.visible {
+  &:global(.visible) {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -65,14 +65,14 @@ span {
 }
 
 // Список опций
-.sort-popup ul {
+.popup ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
 // Элемент списка
-.sort-popup li {
+.popup li {
   padding: 12px 16px;
   color: $text-color;
   cursor: pointer;
@@ -88,7 +88,7 @@ span {
     color: $primary-color;
   }
 
-  &.active {
+  &:global(.active) {
     background-color: rgba(255, 122, 0, 0.12);
     color: $primary-color;
     font-weight: 600;
@@ -97,7 +97,7 @@ span {
 
 // Адаптивность для мобильных устройств
 @media (max-width: 768px) {
-  .sort-popup > div {
+  .popup > div {
     position: fixed;
     top: auto;
     bottom: 0;
@@ -107,7 +107,7 @@ span {
     transform: translateY(100%);
     min-width: auto;
 
-    &.visible {
+    &:global(.visible) {
       transform: translateY(0);
     }
   }

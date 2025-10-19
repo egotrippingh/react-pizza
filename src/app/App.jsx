@@ -8,14 +8,16 @@ import Cart from "../pages/Cart";
 
 import "./App.css";
 
+export const SearchContext = React.createContext();
+
 const App = () => {
   const [searchValue, setSearchValue] = React.useState("");
 
   return (
-    <>
+    <SearchContext.Provider value={{ searchValue, setSearchValue }}>
       <div className="container">
         <div className="topbar">
-          <Header searchValue={searchValue} setSearchValue={setSearchValue} />
+          <Header />
         </div>
       </div>
       <Routes>
@@ -23,7 +25,7 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </SearchContext.Provider>
   );
 };
 

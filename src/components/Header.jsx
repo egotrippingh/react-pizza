@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "/src/styles/Header.scss";
-import Logo from "../Logo/Logo";
+import styles from "/src/styles/Header.module.scss";
+import Logo from "./Logo";
 import CartIcon from "./CartIcon";
-import Search from "../Search/Search";
+import Search from "./Search";
 
-const Header = ({ searchValue, setSearchValue }) => {
+const Header = ({}) => {
   return (
     <>
-      <div className="header">
+      <div className={styles.header}>
         <Logo />
-        <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+        <Search />
         <Link to="/cart">
           <CartIcon />
         </Link>

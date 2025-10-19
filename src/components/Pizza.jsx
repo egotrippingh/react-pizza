@@ -1,4 +1,4 @@
-import "/src/styles/Pizza.scss";
+import styles from "/src/styles/Pizza.module.scss";
 import React from "react";
 
 const Pizza = ({ id, title, imageUrl, sizes, price, types }) => {
@@ -9,40 +9,40 @@ const Pizza = ({ id, title, imageUrl, sizes, price, types }) => {
   const typeNames = ["тонкое", "традиционное"];
 
   return (
-    <section key={id} className="pizza-card">
-      <div className="pizza-card__header">
-        <h3 className="pizza-card__label">{title}</h3>
+    <section key={id} className={styles.card}>
+      <div className={styles.header}>
+        <h3 className={styles.title}>{title}</h3>
         <img
           src={imageUrl}
           alt={`Изображение пиццы ${title}`}
-          className="pizza-card__image"
+          className={styles.image}
         />
       </div>
 
       <strong>{price} ₽</strong>
-      <div className="pizza-card__controls">
-        <span className="pizza-card__quantity-label">Количество:</span>
+      <div className={styles.controls}>
+        <span className={styles.qtyLabel}>Количество:</span>
 
-        <div className="pizza-card__counter">
+        <div className={styles.counter}>
           <button
-            className="pizza-card__button pizza-card__button--minus"
+            className={`${styles.button} ${styles.buttonMinus}`}
             onClick={() => setPizzaCount((current) => Math.max(0, current - 1))}
           >
             −
           </button>
 
-          <span className="pizza-card__count-value">{pizzaCount}</span>
-          <span className="pizza-card__count-unit">шт.</span>
+          <span className={styles.countValue}>{pizzaCount}</span>
+          <span className={styles.countUnit}>шт.</span>
 
           <button
-            className="pizza-card__button pizza-card__button--plus"
+            className={`${styles.button} ${styles.buttonPlus}`}
             onClick={() => setPizzaCount((current) => current + 1)}
           >
             +
           </button>
         </div>
       </div>
-      <ul className="sizes">
+      <ul className={styles.sizes}>
         {types.map((typeId) => (
           <li
             onClick={() => setActiveTesto(typeId)}
@@ -54,7 +54,7 @@ const Pizza = ({ id, title, imageUrl, sizes, price, types }) => {
         ))}
       </ul>
 
-      <ul className="sizes">
+      <ul className={styles.sizes}>
         {sizes.map((size, index) => (
           <li
             onClick={() => setActiveSize(index)}
@@ -66,7 +66,7 @@ const Pizza = ({ id, title, imageUrl, sizes, price, types }) => {
         ))}
       </ul>
 
-      <button className="pizza-card__order-button">
+      <button className={styles.orderButton}>
         Добавить в корзину {pizzaCount === 0 ? "" : `(${price * pizzaCount} ₽)`}
       </button>
     </section>

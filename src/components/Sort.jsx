@@ -1,5 +1,5 @@
 import React from "react";
-import "/src/styles/Sort.scss";
+import styles from "/src/styles/Sort.module.scss";
 
 const Sort = ({ value, onChangeSort, desc, setDescSort }) => {
   const [open, setOpen] = React.useState(false);
@@ -14,7 +14,7 @@ const Sort = ({ value, onChangeSort, desc, setDescSort }) => {
     <div>
       <b>Сортировка по:</b>
       <span onClick={() => setOpen(!open)}>{value.name}</span>
-      <div className="sort-popup">
+      <div className={styles.popup}>
         {open && (
           <div className={`${open ? "visible" : ""}`}>
             <ul>

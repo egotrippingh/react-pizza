@@ -4,20 +4,19 @@ import Pizza from "../components/Pizza";
 import Sort from "../components/Sort";
 import PizzaSkeleton from "../components/PizzaSkeleton";
 import Categories from "../components/Categories";
+import { SearchContext } from "src/app/App";
 
-const Home = ({ searchValue }) => {
+const Home = () => {
+  const { searchValue } = React.useContext(SearchContext);
   const [pizzas, setPizzas] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-
   const [currentPage, setCurrentPage] = React.useState(1);
-
   const [descSort, setDescSort] = React.useState(true);
   const [categoryId, setCategoryId] = React.useState(0);
   const [sortType, setSortType] = React.useState({
     name: "популярности",
     sortProp: "rating",
   });
-
   const pizzasItems = pizzas.map((obj) => <Pizza key={obj.id} {...obj} />);
   const skeletons = [...new Array(6)].map((_, index) => (
     <PizzaSkeleton key={index} />
