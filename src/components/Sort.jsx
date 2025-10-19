@@ -1,15 +1,14 @@
 import React from "react";
-import "./Sort.scss";
+import "/src/styles/Sort.scss";
 
-const Sort = ({value, onChangeSort, desc, setDescSort}) => {
+const Sort = ({ value, onChangeSort, desc, setDescSort }) => {
   const [open, setOpen] = React.useState(false);
-  
+
   const list = [
     { name: "популярности", sortProp: "rating" },
     { name: "цене", sortProp: "price" },
     { name: "алфавиту", sortProp: "title" },
   ];
-
 
   return (
     <div>
@@ -32,11 +31,9 @@ const Sort = ({value, onChangeSort, desc, setDescSort}) => {
           </div>
         )}
       </div>
-      <span onClick={setDescSort}>{desc ? '↓' : '↑'}</span>
+      <span onClick={setDescSort}>{desc ? "↓" : "↑"}</span>
     </div>
   );
 };
 
 export default Sort;
-
-

@@ -1,10 +1,11 @@
 import React from "react";
-import "./Categories.scss";
+import "/src/styles/Categories.scss";
+
 const Categories = ({ value, onClickCategory }) => {
   const navigationList = [
-    { label: "Все"},
+    { label: "Все" },
     { label: "Мясные" },
-    { label: "Вегетарианские"},
+    { label: "Вегетарианские" },
     { label: "Гриль" },
     { label: "Острые" },
     { label: "Закрытые" },
@@ -20,8 +21,7 @@ const Categories = ({ value, onClickCategory }) => {
               key={i}
               className={`categories__navigation ${
                 value === i ? "active" : ""
-              }`}
-            >
+              }`}>
               {item.label}
             </li>
           );

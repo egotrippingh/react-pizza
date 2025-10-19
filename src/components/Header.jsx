@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Header.scss";
-import Logo from "../Logo";
-import CartIcon from "../CartIcon";
-import Search from "../Search";
+import "/src/styles/Header.scss";
+import Logo from "../Logo/Logo";
+import CartIcon from "./CartIcon";
+import Search from "../Search/Search";
 
 const Header = ({ searchValue, setSearchValue }) => {
   return (
