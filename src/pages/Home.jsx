@@ -5,23 +5,20 @@ import Sort from "../components/Sort";
 import PizzaSkeleton from "../components/PizzaSkeleton";
 import Categories from "../components/Categories";
 import { SearchContext } from "src/app/App";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const { searchValue } = React.useContext(SearchContext);
   const [pizzas, setPizzas] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [descSort, setDescSort] = React.useState(true);
-  const [categoryId, setCategoryId] = React.useState(0);
-  const [sortType, setSortType] = React.useState({
-    name: "популярности",
-    sortProp: "rating",
-  });
+
+  // Используем Redux вместо локального состояния
+  const { categoryId, sort, desc } = useSelector((state) => state.filter);
   const pizzasItems = pizzas.map((obj) => <Pizza key={obj.id} {...obj} />);
   const skeletons = [...new Array(6)].map((_, index) => (
     <PizzaSkeleton key={index} />
   ));
-
   const search = searchValue ? `&search=${searchValue}` : "";
 
   React.useEffect(() => {
@@ -31,9 +28,7 @@ const Home = () => {
         const res = await fetch(
           `https://68e2aa938e14f4523dab802e.mockapi.io/items?page=${currentPage}&limit=6&${
             categoryId > 0 ? `category=${categoryId}&` : ""
-          }sortBy=${sortType.sortProp}&order=$
-          {descSort ? "desc" : "asc"}
-          ${search}`
+          }sortBy=${sort.sortProperty}&order=${desc ? "desc" : "asc"}${search}`
         );
         if (!res.ok) {
           throw new Error("Ошибка при подключении к серверу");
@@ -47,21 +42,13 @@ const Home = () => {
     };
     fetchPizzas();
     window.scrollTo(0, 0);
-  }, [categoryId, sortType.sortProp, descSort, searchValue, currentPage]);
+  }, [categoryId, sort.sortProperty, desc, searchValue, currentPage]);
 
   return (
     <>
       <div className="filters-row">
-        <Categories
-          value={categoryId}
-          onClickCategory={(i) => setCategoryId(i)}
-        />
-        <Sort
-          value={sortType}
-          onChangeSort={(obj) => setSortType(obj)}
-          desc={descSort}
-          setDescSort={() => setDescSort(!descSort)}
-        />
+        <Categories />
+        <Sort />
       </div>
       <div className="pizza-container">
         {isLoading ? skeletons : pizzasItems}

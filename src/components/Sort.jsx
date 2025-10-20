@@ -1,19 +1,26 @@
 import React from "react";
 import styles from "/src/styles/Sort.module.scss";
 
-const Sort = ({ value, onChangeSort, desc, setDescSort }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { setSort, setDesc } from "src/redux/slices/filterSlice";
+
+const Sort = () => {
+  const dispatch = useDispatch();
+  const sort = useSelector((state) => state.filter.sort);
+  const desc = useSelector((state) => state.filter.desc);
+
   const [open, setOpen] = React.useState(false);
 
   const list = [
-    { name: "популярности", sortProp: "rating" },
-    { name: "цене", sortProp: "price" },
-    { name: "алфавиту", sortProp: "title" },
+    { name: "популярности", sortProperty: "rating" },
+    { name: "цене", sortProperty: "price" },
+    { name: "алфавиту", sortProperty: "title" },
   ];
 
   return (
     <div>
       <b>Сортировка по:</b>
-      <span onClick={() => setOpen(!open)}>{value.name}</span>
+      <span onClick={() => setOpen(!open)}>{sort.name}</span>
       <div className={styles.popup}>
         {open && (
           <div className={`${open ? "visible" : ""}`}>
@@ -21,8 +28,13 @@ const Sort = ({ value, onChangeSort, desc, setDescSort }) => {
               {list.map((obj, i) => (
                 <li
                   key={i}
-                  onClick={() => (onChangeSort(obj), setOpen(false))}
-                  className={value.sortProp === obj.sortProp ? "active" : ""}
+                  onClick={() => {
+                    dispatch(setSort(obj));
+                    setOpen(false);
+                  }}
+                  className={
+                    sort.sortProperty === obj.sortProperty ? "active" : ""
+                  }
                 >
                   {obj.name}
                 </li>
@@ -31,7 +43,7 @@ const Sort = ({ value, onChangeSort, desc, setDescSort }) => {
           </div>
         )}
       </div>
-      <span onClick={setDescSort}>{desc ? "↓" : "↑"}</span>
+      <span onClick={() => dispatch(setDesc(!desc))}>{desc ? "↓" : "↑"}</span>
     </div>
   );
 };

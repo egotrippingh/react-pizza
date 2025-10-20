@@ -1,7 +1,12 @@
 import React from "react";
 import styles from "/src/styles/Categories.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategoryId } from "src/redux/slices/filterSlice";
 
-const Categories = ({ value, onClickCategory }) => {
+const Categories = () => {
+  const dispatch = useDispatch();
+  const categoryId = useSelector((state) => state.filter.categoryId);
+
   const navigationList = [
     { label: "Все" },
     { label: "Мясные" },
@@ -17,9 +22,9 @@ const Categories = ({ value, onClickCategory }) => {
         {navigationList.map((item, i) => {
           return (
             <li
-              onClick={() => onClickCategory(i)}
+              onClick={() => dispatch(setCategoryId(i))}
               key={i}
-              className={`${styles.item} ${value === i ? "active" : ""}`}
+              className={`${styles.item} ${categoryId === i ? "active" : ""}`}
             >
               {item.label}
             </li>
