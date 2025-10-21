@@ -2,21 +2,46 @@ import React from "react";
 import "/src/styles/Search.module.scss";
 import { SearchContext } from "src/app/App";
 import styles from "/src/styles/Search.module.scss";
+import debounce from "lodash.debounce";
 
 const Search = () => {
+  const [value, setValue] = React.useState("");
   const { searchValue, setSearchValue } = React.useContext(SearchContext);
 
+  const updateSearchValue = React.useCallback(
+    debounce((str) => {
+      console.log("Debounced search:", str);
+      setSearchValue(str);
+    }, 500),
+    []
+  );
+
+  const onChangeInput = (event) => {
+    const newValue = event.target.value;
+    console.log("Input changed:", newValue);
+    setValue(newValue);
+    updateSearchValue(newValue);
+  };
+
+  const clearSearch = () => {
+    setSearchValue("");
+    setValue("");
+    inputRef.current.focus();
+  };
+
+  const inputRef = React.useRef();
   return (
     <div className={styles.container}>
       <input
-        value={searchValue}
-        onChange={(event) => setSearchValue(event.target.value)}
+        ref={inputRef}
+        value={value}
+        onChange={onChangeInput}
         className={styles.root}
         type="text"
         placeholder="Поиск пиццы..."
       />
 
-      {searchValue === "" ? (
+      {value === "" ? (
         <img
           src="/search.png"
           alt="."
@@ -33,7 +58,7 @@ const Search = () => {
           height="25"
           loading="eager"
           className={styles.icon_clear}
-          onClick={() => setSearchValue("")}
+          onClick={() => clearSearch()}
         />
       )}
     </div>

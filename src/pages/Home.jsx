@@ -6,6 +6,7 @@ import PizzaSkeleton from "../components/PizzaSkeleton";
 import Categories from "../components/Categories";
 import { SearchContext } from "src/app/App";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 const Home = () => {
   const { searchValue } = React.useContext(SearchContext);
@@ -21,26 +22,37 @@ const Home = () => {
   ));
   const search = searchValue ? `&search=${searchValue}` : "";
 
+  // Смена страницы при смене категории или поискового запроса
   React.useEffect(() => {
-    const fetchPizzas = async () => {
+    setCurrentPage(1);
+  }, [categoryId, searchValue]);
+
+  // Загрузка пицц через API
+  React.useEffect(() => {
+    const axiosGetPizzas = async () => {
+      setIsLoading(true);
+
       try {
-        setIsLoading(true);
-        const res = await fetch(
+        const response = await axios.get(
           `https://68e2aa938e14f4523dab802e.mockapi.io/items?page=${currentPage}&limit=6&${
             categoryId > 0 ? `category=${categoryId}&` : ""
           }sortBy=${sort.sortProperty}&order=${desc ? "desc" : "asc"}${search}`
         );
-        if (!res.ok) {
-          throw new Error("Ошибка при подключении к серверу");
+
+        setPizzas(response.data);
+      } catch (error) {
+        console.error("Error fetching pizzas:", error);
+
+        if (error.response?.status === 404) {
+          setPizzas([]);
+        } else {
+          console.error("Network or server error:", error);
         }
-        const data = await res.json();
-        setPizzas(data);
+      } finally {
         setIsLoading(false);
-      } catch (err) {
-        console.error(err);
       }
     };
-    fetchPizzas();
+    axiosGetPizzas();
     window.scrollTo(0, 0);
   }, [categoryId, sort.sortProperty, desc, searchValue, currentPage]);
 
