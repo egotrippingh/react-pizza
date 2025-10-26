@@ -8,13 +8,21 @@ const Search = () => {
   const [value, setValue] = React.useState("");
   const { searchValue, setSearchValue } = React.useContext(SearchContext);
 
+  const inputRef = React.useRef();
+
   const updateSearchValue = React.useCallback(
     debounce((str) => {
       console.log("Debounced search:", str);
       setSearchValue(str);
     }, 500),
-    []
+    [setSearchValue]
   );
+
+  React.useEffect(() => {
+    return () => {
+      updateSearchValue.cancel();
+    };
+  }, [updateSearchValue]);
 
   const onChangeInput = (event) => {
     const newValue = event.target.value;
@@ -28,8 +36,6 @@ const Search = () => {
     setValue("");
     inputRef.current.focus();
   };
-
-  const inputRef = React.useRef();
   return (
     <div className={styles.container}>
       <input

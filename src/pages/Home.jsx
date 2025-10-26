@@ -20,7 +20,6 @@ const Home = () => {
   const skeletons = [...new Array(6)].map((_, index) => (
     <PizzaSkeleton key={index} />
   ));
-  const search = searchValue ? `&search=${searchValue}` : "";
 
   // Смена страницы при смене категории или поискового запроса
   React.useEffect(() => {
@@ -33,13 +32,51 @@ const Home = () => {
       setIsLoading(true);
 
       try {
-        const response = await axios.get(
-          `https://68e2aa938e14f4523dab802e.mockapi.io/items?page=${currentPage}&limit=6&${
-            categoryId > 0 ? `category=${categoryId}&` : ""
-          }sortBy=${sort.sortProperty}&order=${desc ? "desc" : "asc"}${search}`
-        );
+        // Если есть поисковый запрос с категорией, получаем все данные категории и фильтруем на клиенте
+        // так как MockAPI некорректно обрабатывает search вместе с category
+        if (searchValue && categoryId > 0) {
+          // Получаем все данные категории без пагинации
+          const url = `https://68e2aa938e14f4523dab802e.mockapi.io/items?sortBy=${
+            sort.sortProperty
+          }&order=${desc ? "desc" : "asc"}&category=${categoryId}`;
 
-        setPizzas(response.data);
+          const response = await axios.get(url);
+          const allPizzas = response.data;
+
+          // Фильтруем по поисковому запросу на клиенте
+          const searchLower = searchValue.toLowerCase();
+          const filtered = allPizzas.filter(
+            (pizza) =>
+              pizza.title.toLowerCase().includes(searchLower) ||
+              (pizza.description &&
+                pizza.description.toLowerCase().includes(searchLower))
+          );
+
+          // Применяем пагинацию на клиенте
+          const startIndex = (currentPage - 1) * 6;
+          const endIndex = startIndex + 6;
+          const paginatedPizzas = filtered.slice(startIndex, endIndex);
+
+          setPizzas(paginatedPizzas);
+        } else {
+          // Обычный запрос с пагинацией на сервере
+          let url = `https://68e2aa938e14f4523dab802e.mockapi.io/items?page=${currentPage}&limit=6&sortBy=${
+            sort.sortProperty
+          }&order=${desc ? "desc" : "asc"}`;
+
+          // Добавляем параметр category только если выбрана категория
+          if (categoryId > 0) {
+            url += `&category=${categoryId}`;
+          }
+
+          // Добавляем параметр поиска только если есть значение и не выбрана категория
+          if (searchValue && categoryId === 0) {
+            url += `&search=${encodeURIComponent(searchValue)}`;
+          }
+
+          const response = await axios.get(url);
+          setPizzas(response.data);
+        }
       } catch (error) {
         console.error("Error fetching pizzas:", error);
 
